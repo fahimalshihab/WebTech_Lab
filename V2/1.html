@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Form</title>
+    <link rel="icon" type="image/x-icon" href="1.jpg">
+    <meta name="description" content="A user registration form with profile section">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="AQI.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="profile-pic" aria-label="Profile picture"></div>
+        <h1>Welcome To My App</h1>
+        <div class="rec1">
+            <div class="form-column rectangle">
+                <div class="london">
+                    <form id="registrationForm" novalidate>
+                        <h2>Fill Up The Form</h2>
+                        
+                        <label for="uname">Full Name</label>
+                        <input type="text" id="uname" name="uname" placeholder="Enter your full name" required>
+                        
+                        <label for="uemail">Email</label>
+                        <input type="email" id="uemail" name="uemail" placeholder="test@test.com" required>
+                        
+                        <label for="pass">Password</label>
+                        <input type="password" id="pass" name="pass" placeholder="Create a password" required>
+                        
+                        <label for="confirmpass">Confirm Password</label>
+                        <input type="password" id="confirmpass" name="confirmpass" placeholder="Confirm your password" required>
+                        
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob" required>
+                        
+                        <fieldset>
+                            <legend>Gender</legend>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" name="gen" value="Male" required>
+                                    Male
+                                </label>
+                                <label>
+                                    <input type="radio" name="gen" value="Female">
+                                    Female
+                                </label>
+                            </div>
+                        </fieldset>
+                        
+                        <label for="fcolor">Favorite Color</label>
+                        <input type="color" id="fcolor" name="fcolor" value="#640853">
+                        
+                        <div class="terms">
+                            <label for="tc">I agree to the <a href="https://open.spotify.com/playlist/37i9dQZF1E4zVGgUS6jRTb" target="_blank" rel="noopener noreferrer">Terms and Conditions</a></label>
+                            <input type="checkbox" id="tc" name="tc" required>
+
+                        </div>
+                        
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" name="bio" cols="15" rows="5" placeholder="Tell us about yourself..." required></textarea>
+                        
+                        <button type="submit">Sign Up</button>
+             </form>
+            </div>
+            </div>
+            
+            <div class="side-column">
+                <div class="rectangle rec2">
+                    <h2>Login</h2>
+                     <form id="loginForm">
+                        <div class="form-group">
+                             <label for="loginEmail">Email</label>
+                             <input type="email" id="loginEmail" name="loginEmail" placeholder="Enter your email" required>
+                         </div>
+
+                         <div class="form-group">
+                             <label for="loginPassword">Password</label>
+                             <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter your password" required>
+                     </div>
+
+                     <button type="submit">Login</button>
+             </form>
+                </div>
+                <div class="rectangle rec3">
+                    <div class="rectangle rec3">
+                        <h2>City AQI Table</h2>
+                        <table class="aqi-table">
+                            <thead>
+                                <tr>
+                                    <th>City</th>
+                                    <th>AQI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>New York</td><td>58</td></tr>
+                                <tr><td>Los Angeles</td><td>72</td></tr>
+                                <tr><td>Chicago</td><td>65</td></tr>
+                                <tr><td>Houston</td><td>80</td></tr>
+                                <tr><td>Phoenix</td><td>70</td></tr>
+                                <tr><td>Philadelphia</td><td>55</td></tr>
+                                <tr><td>San Antonio</td><td>75</td></tr>
+                                <tr><td>San Diego</td><td>60</td></tr>
+                                <tr><td>Dallas</td><td>68</td></tr>
+                                <tr><td>San Jose</td><td>50</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+            let isValid = true;
+
+            clearErrors();
+            if (!form.uname.value.trim()) {
+                showError(form.uname, "Name is required");
+                isValid = false;
+            }
+
+            if (!form.uemail.value.trim()) {
+                showError(form.uemail, "Email is required");
+                isValid = false;
+            } else if (!/\S+@\S+\.\S+/.test(form.uemail.value)) {
+                showError(form.uemail, "Invalid email format");
+                isValid = false;
+            }
+
+            if (form.pass.value.length < 8) {
+                showError(form.pass, "Password must be at least 8 characters");
+                isValid = false;
+            }
+
+            if (form.pass.value !== form.confirmpass.value) {
+                showError(form.confirmpass, "Passwords do not match");
+                isValid = false;
+            }
+
+            if (new Date(form.dob.value) > new Date(Date.now() - 18 * 365.25 * 24 * 60 * 60 * 1000)) {
+                showError(form.dob, "You must be at least 18 years old");
+                isValid = false;
+            }
+
+            if (!form.gen.value) {
+                showError(form.gen, "Please select your gender");
+                isValid = false;
+            }
+
+            if (!form.tc.checked) {
+                showError(form.tc, "You must agree to the Terms and Conditions");
+                isValid = false;
+            }
+
+            if (!form.bio.value.trim() || form.bio.value.trim().length < 20) {
+                showError(form.bio, "Bio must be at least 20 characters");
+                isValid = false;
+            }
+
+            if (isValid) {
+                const userData = Object.fromEntries(formData.entries());
+                localStorage.setItem('formData', JSON.stringify(userData));
+                window.location.href = 'success.html';
+            }
+        });
+
+        function showError(input, message) {
+            const errorElement = document.createElement('div');
+            errorElement.className = 'error-message';
+            errorElement.textContent = message;
+            errorElement.style.color = 'red';
+            input.style.borderColor = 'red';
+            input.parentNode.appendChild(errorElement);
+        }
+
+        function clearErrors() {
+            const errors = document.querySelectorAll('.error-message');
+            errors.forEach(error => error.remove());
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => input.style.borderColor = '');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      if (!email || !password) {
+        alert('Please enter both email and password.');
+        return;
+      }
+      const validEmail = 'user@example.com';
+      const validPassword = 'password123';
+      if (email === validEmail && password === validPassword) {
+        alert('Login successful!');
+      } else {
+        alert('Invalid email or password.');
+      }
+    });
+  });
+    </script>
+</body>
+</html>
