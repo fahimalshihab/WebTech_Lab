@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Registration Form</title>
+  <link rel="icon" type="image/x-icon" href="1.jpg"/>
+  <meta name="description" content="A user registration form with profile section"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="AQI.css"/>
+  <style>
+    .blurred {
+      filter: blur(5px);
+      pointer-events: none;
+    }
+    .overlay-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      font-size: 20px;
+      color: #333;
+      display: block;
+      z-index: 10;
+    }
+    .table-container {
+      position: relative;
+    }
+    .error-message {
+      font-size: 12px;
+      color: red;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile-pic" aria-label="Profile picture"></div>
+    <h1>Welcome To My App</h1>
+    <div class="rec1">
+      <div class="form-column rectangle">
+        <div class="london">
+          <form id="registrationForm" method="POST" action="success.php">
+            <h2>Fill Up The Form</h2>
+            <label for="uname">Full Name</label>
+            <input type="text" id="uname" name="uname" placeholder="Enter your full name" required />
+            <label for="uemail">Email</label>
+            <input type="email" id="uemail" name="uemail" placeholder="test@test.com" required />
+            <label for="pass">Password</label>
+            <input type="password" id="pass" name="pass" placeholder="Create a password" required />
+            <label for="confirmpass">Confirm Password</label>
+            <input type="password" id="confirmpass" name="confirmpass" placeholder="Confirm your password" required />
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" required />
+            <fieldset>
+              <legend>Gender</legend>
+              <div class="radio-group">
+                <label><input type="radio" name="gen" value="Male" required /> Male</label>
+                <label><input type="radio" name="gen" value="Female" /> Female</label>
+              </div>
+            </fieldset>
+            <label for="fcolor">Favorite Color</label>
+            <input type="color" id="fcolor" name="fcolor" value="#640853" />
+            <div class="terms">
+              <label for="tc">I agree to the 
+                <a href="https://open.spotify.com/playlist/37i9dQZF1E4zVGgUS6jRTb" target="_blank">Terms and Conditions</a>
+              </label>
+              <input type="checkbox" id="tc" name="tc" required />
+            </div>
+            <label for="bio">Bio</label>
+            <textarea id="bio" name="bio" cols="15" rows="5" placeholder="Tell us about yourself..." required></textarea>
+            <button type="submit">Sign Up</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="side-column">
+        <div class="rectangle rec2" style="width: 400px;">
+          <h2>Login</h2>
+          <form method="POST" action="login.php">
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input type="email" id="loginEmail" name="loginEmail" placeholder="Enter your email" required />
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter your password" required />
+            </div>
+            <button type="submit">Login</button>
+          </form>
+        </div>
+
+        <div class="rectangle rec3" style="width: 400px;">
+          <h2>City AQI Table</h2>
+          <div class="table-container">
+            <div class="overlay-text">Login First</div>
+            <table id="aqiTable" class="aqi-table blurred">
+              <thead>
+                <tr><th>City</th><th>AQI</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>New York</td><td>58</td></tr>
+                <tr><td>Los Angeles</td><td>72</td></tr>
+                <tr><td>Chicago</td><td>65</td></tr>
+                <tr><td>Houston</td><td>80</td></tr>
+                <tr><td>Phoenix</td><td>70</td></tr>
+                <tr><td>Philadelphia</td><td>55</td></tr>
+                <tr><td>San Antonio</td><td>75</td></tr>
+                <tr><td>San Diego</td><td>60</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

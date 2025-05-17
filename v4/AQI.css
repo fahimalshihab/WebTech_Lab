@@ -1,0 +1,41 @@
+.aqi-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: var(--light-text);
+    color: var(--text-color);
+    table-layout: fixed;
+}
+
+.aqi-table th, .aqi-table td {
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.aqi-table th {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    font-weight: bold;
+}
+
+.aqi-table tr:nth-child(even) {
+    background-color: var(--light-accent);
+}
+
+.aqi-table tr:hover {
+    background-color: var(--secondary-color);
+    color: var(--light-text);
+}
+
+/* Blurred middle rows only */
+.blurred-row {
+    filter: blur(5px);
+}
+
+/* Unblur top and bottom rows explicitly */
+.aqi-table tbody tr:first-child,
+.aqi-table tbody tr:last-child {
+    filter: none !important;
+}
